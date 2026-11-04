@@ -1,0 +1,8 @@
+<?php
+require '../config/app.php'; require_role('patient');$title='Appointment Details';$basePath='../';$id=(int)($_GET['id']??0);$uid=user()['id'];
+$st=$pdo->prepare("SELECT a.*,t.name test_name,t.category,t.description,t.price,p.method,p.transaction_id,p.status payment_status,r.result_text,r.result_status FROM appointments a JOIN diagnostic_tests t ON t.id=a.test_id LEFT JOIN payments p ON p.appointment_id=a.id LEFT JOIN test_results r ON r.appointment_id=a.id WHERE a.id=? AND a.patient_id=?");$st->execute([$id,$uid]);$a=$st->fetch();if(!$a)exit('Appointment not found.');
+require '../partials/header.php'; if(isset($_GET['paid'])): ?><div class="alert alert-success"><i class="bi bi-check-circle me-2"></i>Payment verified successfully.</div><?php endif; ?>
+<div class="card p-4"><div class="d-flex justify-content-between"><div><h3><?=e($a['test_name'])?></h3><p class="text-muted"><?=e($a['category'])?></p></div><span class="badge text-bg-primary align-self-start"><?=e($a['status'])?></span></div>
+<div class="row g-3"><div class="col-md-6"><strong>Date</strong><br><?=e($a['appointment_date'])?></div><div class="col-md-6"><strong>Time</strong><br><?=date('h:i A',strtotime($a['appointment_time']))?></div><div class="col-md-6"><strong>Payment</strong><br><?=e($a['payment_status']??'Pending')?> <?=!empty($a['transaction_id'])?'('.e($a['transaction_id']).')':''?></div><div class="col-md-6"><strong>Result</strong><br><?=e($a['result_status']??'Not started')?></div><div class="col-12"><strong>Report / Result</strong><div class="bg-light rounded p-3 mt-2"><?=nl2br(e($a['result_text']??'Report will appear here after testing.'))?></div></div></div>
+<a class="btn btn-light mt-4" href="dashboard.php">Back</a></div>
+<?php require '../partials/footer.php'; ?>
