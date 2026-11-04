@@ -272,3 +272,20 @@ https://github.com/Sudhatamatta95/Diagnostic_Lab_Appointment_System
 DiagnosCare V5 provides a centralized digital platform for managing diagnostic laboratory activities. It simplifies appointment booking, patient management, technician assignments and payment processing.
 
 The project demonstrates practical implementation of PHP, MySQL, frontend development, database connectivity, authentication and role-based access control.
+
+## 10. Project Screenshots
+
+### Homepage
+![Homepage](screenshots/HomePage.png)
+
+### Patient Dashboard
+![Patient Dashboard](screenshots/PatientDashboard.png)
+
+### Admin Dashboard
+![Admin Dashboard](screenshots/AdminDashboard.png)
+
+### Appointment Booking
+![Appointment Booking](screenshots/BookingTest.png)
+
+### Payment Page
+![Payment Page](screenshots/TechnicianDashboard.png)
